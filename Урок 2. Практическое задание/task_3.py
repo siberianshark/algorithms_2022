@@ -18,3 +18,18 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+##################################
+
+
+def get_rev_number(number, rev_number = ''):
+
+    if number == 0:
+        return rev_number
+    else:
+
+        last_number = number % 10
+        rev_number += str(last_number)
+        return get_rev_number(number // 10, rev_number)
+
+print(get_rev_number(1230))
