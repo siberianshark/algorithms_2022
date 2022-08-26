@@ -23,7 +23,6 @@ print(len(profit_company))
 # Первый способ:
 # сложность O(n log n)
 
-
 def by_value(item):
     return item[1]                                                          # O(1)
 
