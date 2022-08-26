@@ -16,7 +16,6 @@
 """
 
 
-
 # сложность O(n)
 def get_min_number(lst):
     min_number = lst[0]                                     # O(1)
