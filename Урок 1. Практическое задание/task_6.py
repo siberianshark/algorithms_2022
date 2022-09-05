@@ -19,7 +19,6 @@
 """
 
 
-
 class QueueClass:
     def __init__(self):
         self.base = []

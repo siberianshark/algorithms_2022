@@ -31,7 +31,6 @@ users_db_dict = {
     "admin": ["dwefrfd123", True]
 }
 
-
 users_db_list = [
     ["oleg", "dwe123", True],
     ["timur", "dwe143423", True],

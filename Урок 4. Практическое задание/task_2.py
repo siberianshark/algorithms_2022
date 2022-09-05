@@ -18,7 +18,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -80,3 +80,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# Оптимизация через мемоизацию в данном случае является не эффективным решением,
+# так как сохраняет в кэш результат функции для числа большего на один порядок и он не может быть продублирован.
+# Но ускорении работы функции происходит за счет хранения результата в кэш - памяти и разгрузки опертивной памяти.
