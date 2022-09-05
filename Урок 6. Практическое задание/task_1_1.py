@@ -30,3 +30,50 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import profile
+
+@profile
+def decor(func):                                                    # 0
+    def wrapper(*argv):                                             # 0
+        return func(*argv)                                          # 0
+    return wrapper                                                  # 0
+
+@ decor
+def get_rev_number(number, rev_number = ''):                        # 0
+    if number == 0:                                                 # 0
+        return rev_number                                           # 0
+    else:
+        last_number = number % 10                                   # 0
+        rev_number += str(last_number)                              # 0
+        return get_rev_number(number // 10, rev_number)             # 0.2
+
+@profile
+def get_rev_number_2(number, rev_number = ''):                      # 0
+    while number != 0:                                              # 0
+        last_number = number % 10                                   # 0
+        rev_number += str(last_number)                              # 0
+        number = number // 10                                       # 0
+    return rev_number                                               # 0
+
+number_s = 1230
+print(get_rev_number(number_s))
+print(get_rev_number_2(number_s))
+# print(
+#     timeit(
+#         "get_rev_number(number_s)",
+#         setup="from __main__ import get_rev_number, number_s", number=1000000))
+# print(
+#     timeit(
+#         "get_rev_number_2(number_s)",
+#         setup="from __main__ import get_rev_number_2, number_s", number=1000000))
+
+
+#1 000 000 повторений:
+#get_rev_number = 1.291
+#get_rev_number_2 = 1.012
+
+#Замена Рекурсии на Цикл привела к снижению сложности и увеличению скорости
+#обработки операций с факториальной O(n!) на линейную O(n).
+#@profile - показывает, что цикл не нагружает доп. элементы в Increment - что говорит о том,
+#что дополнительной опертивной памяти для хранения Итерации не требуется.

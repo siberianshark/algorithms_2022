@@ -30,3 +30,38 @@
 
 Это файл для третьего скрипта
 """
+
+# recordclass vs defaultdict
+
+
+from collections import defaultdict
+from recordclass import recordclass
+from numpy import number
+import sys
+
+a = input('Введите первое число: ')
+b = input('Введите второе число: ')
+
+ddict = defaultdict(list)
+ddict[1] = list(a)
+ddict[2] = list(b)
+print(ddict)
+
+# c = hex(int(''.join(str(i) for i in ddict[1]), 16) * int(''.join(str(i) for i in ddict[2]), 16))
+# d = hex(int(''.join(str(i) for i in ddict[1]), 16) + int(''.join(str(i) for i in ddict[2]), 16))
+# print(f'Сумма: {list(d[2:].upper())}')
+# print(f'Произведение: {list(c[2:].upper())}')
+
+rec_val = recordclass('rec_val', ('x', 'y'))
+
+rec_val = rec_val(x=list(a), y=list(b))
+print(rec_val)
+
+print(f'Объём занимаемой объектом recordclass памяти: {sys.getsizeof(rec_val)} байт(а)')
+print(f'Объём занимаемой объектом ddict памяти: {sys.getsizeof(ddict)} байт(а)')
+
+
+#Объём занимаемой объектом recordclass памяти: 40 байт(а)
+#Объём занимаемой объектом ddict памяти: 240 байт(а)
+#Объем занимаемой памяти recordclass в 5 раз меньше, чем ddict.
+#Поэтому выполнение объемных алгоритмов будет испольняться в разы быстрее.
