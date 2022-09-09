@@ -30,3 +30,38 @@
 
 Это файл для второго скрипта
 """
+# 2 Изменение типа __slots__ в class
+
+from pympler import asizeof
+from timeit import timeit
+
+
+class HexNumber:
+    def __init__(self, num_1,num_2):
+        self.num_1 = num_1
+        self.num_2 = num_2
+
+
+simple_int_1 = '1a3'
+simple_int_2 = '3de'
+a = HexNumber(simple_int_1, simple_int_2)
+print(asizeof.asizeof((a)))                                     # asizeof.asizeof = 376
+
+class HexNumber:
+    __slots__ = ('num_1', 'num_2')
+    def __init__(self, num_1,num_2):
+        self.num_1 = num_1
+        self.num_2 = num_2
+
+
+simple_int_1 = '1a3'
+simple_int_2 = '3de'
+a = HexNumber(simple_int_1, simple_int_2)
+print(asizeof.asizeof((a)))                                     # asizeof.asizeof = 160
+
+
+#Использование __slots__ приводит к изменению типа данных для хранения.
+#По умолчанию используется dict, и так как его идентификаторы/ключи ХЕШируются,
+#данные занимают вдвое больше памяти, например, по сравнению с tuple!
+#asizeof.asizeof = 376 без использования __slots__
+#asizeof.asizeof = 160 с использования __slots__
